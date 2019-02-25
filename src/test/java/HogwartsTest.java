@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import page.HogwartsPage;
 import page.HomePage;
 import page.NotSignInPage;
 
@@ -19,8 +18,7 @@ class HogwartsTest {
 
     @Test
     void notSignInTest(){
-        HogwartsPage hogwartsPage = homePage.gotoHogwartsPage();
-        hogwartsPage.gotoPaper();
+        homePage.gotoHogwartsPage().gotoPaper();
 
         NotSignInPage notSignInPage = new NotSignInPage(driver);
         Assertions.assertEquals("访问被拒绝，你可能没有权限或未登录。", notSignInPage.getAlertMsg());
