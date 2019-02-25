@@ -8,12 +8,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class NavBarPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(css = ".form-control")
     private WebElement searchWebElement;
 
-    public NavBarPage(WebDriver driver) {
+    NavBarPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
@@ -25,5 +25,9 @@ public class NavBarPage {
         actions.sendKeys(Keys.ENTER).perform();
 
         return new SearchPage(driver);
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }

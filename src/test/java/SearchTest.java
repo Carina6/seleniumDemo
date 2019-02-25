@@ -1,45 +1,33 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import page.HomePage;
 import page.SearchPage;
 
-import java.io.File;
 import java.util.List;
 
-public class SearchTest {
-    WebDriver driver;
-    String path = "src/main/resources/driver/chromedriver";
+class SearchTest {
+    private HomePage homePage;
+    private WebDriver driver;
 
-    HomePage homePage;
-
-    @BeforeMethod
+    @BeforeEach
     void setUp(){
-        File file = new File(path);
-        System.setProperty("webdriver.chrome.driver", file.getAbsoluteFile().toString());
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-
-//        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-
-        homePage = new HomePage(driver);
+        homePage = HomePage.start();
+        driver = homePage.getDriver();
     }
 
-    @Test
-    public void test(){
-        driver.get("https://testerhome.com/");
-
-        String keyword = "selenium";
+    @ParameterizedTest
+    @CsvSource({
+            "selenium",
+            "appium"
+    })
+//    @CsvFileSource(resources = "/searchData.csv")
+    void searchTest(String keyword){
+//        driver.get("https://testerhome.com/");
 
         SearchPage searchPage = homePage.gotoSearchPage(keyword);
         List<WebElement> resultsForTitle = searchPage.getSearchResultsForTitle();
@@ -49,16 +37,16 @@ public class SearchTest {
         for(int i=0;i<resultsForTitle.size();i++){
             result = resultsForTitle.get(i).getText().trim();
             try {
-                Assert.assertTrue(result.toLowerCase().contains(keyword.toLowerCase()));
+                Assertions.assertTrue(result.toLowerCase().contains(keyword.toLowerCase()));
             } catch (AssertionError e){
                 result = resultsForDesc.get(i).getText().trim();
-                Assert.assertTrue(result.toLowerCase().contains(keyword.toLowerCase()));
+                Assertions.assertTrue(result.toLowerCase().contains(keyword.toLowerCase()));
             }
         }
 
     }
 
-    @AfterMethod
+    @AfterEach
     void tearDown(){
         driver.quit();
     }
