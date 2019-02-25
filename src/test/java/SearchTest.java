@@ -27,8 +27,6 @@ class SearchTest {
     })
 //    @CsvFileSource(resources = "/searchData.csv")
     void searchTest(String keyword){
-//        driver.get("https://testerhome.com/");
-
         SearchPage searchPage = homePage.gotoSearchPage(keyword);
         List<WebElement> resultsForTitle = searchPage.getSearchResultsForTitle();
         List<WebElement> resultsForDesc = searchPage.getSearchResultsForDesc();

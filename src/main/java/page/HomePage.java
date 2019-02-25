@@ -2,6 +2,8 @@ package page;
 
 import driver.Driver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.FileUtil;
 
 public class HomePage extends NavBarPage {
@@ -16,5 +18,6 @@ public class HomePage extends NavBarPage {
 
     private HomePage(WebDriver driver) {
         super(driver);
+//        new WebDriverWait(driver,30).until(ExpectedConditions.titleIs("TesterHome"));
     }
 }
