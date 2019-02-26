@@ -3,6 +3,8 @@ package driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.FileUtil;
 
 import java.io.File;
 
@@ -35,6 +37,14 @@ public class Driver {
         File file = new File(path);
         System.setProperty("webdriver.chrome.driver", file.getAbsoluteFile().toString());
 
+    }
+
+    public static WebDriverWait webDriverWait(){
+        return new WebDriverWait(driver, FileUtil.getConfig().timeOut);
+    }
+
+    public static WebDriverWait webDriverWait(Integer timeOut){
+        return new WebDriverWait(driver, timeOut);
     }
 
     public static WebDriver getDriver() {

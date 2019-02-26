@@ -4,26 +4,22 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.HomePage;
-import page.NotSignInPage;
 
-class HogwartsTest {
+class BannerTest {
     private HomePage homePage;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         homePage = HomePage.start();
     }
 
     @Test
-    void notSignInTest(){
-        homePage.gotoHogwartsPage().gotoPaper();
-
-        NotSignInPage notSignInPage = new NotSignInPage();
-        Assertions.assertEquals("访问被拒绝，你可能没有权限或未登录。", notSignInPage.getAlertMsg());
+    void bannerTest() {
+        Assertions.assertTrue(homePage.gotoBannerPage().getTitle().contains("第五届移动互联网测试开发大会"));
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         Driver.getDriver().quit();
     }
 }

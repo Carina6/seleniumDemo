@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class Config {
     public String  homeUrl;
+    public Integer timeOut;
 
     public static Config load(String path){
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
@@ -24,5 +25,13 @@ public class Config {
 
     public void setHomeUrl(String homeUrl) {
         this.homeUrl = homeUrl;
+    }
+
+    public Integer getTimeOut() {
+        return timeOut;
+    }
+
+    public void setTimeOut(Integer timeOut) {
+        this.timeOut = timeOut;
     }
 }

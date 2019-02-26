@@ -1,9 +1,9 @@
+import driver.Driver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import page.HomePage;
 import page.SearchPage;
@@ -12,12 +12,10 @@ import java.util.List;
 
 class SearchTest {
     private HomePage homePage;
-    private WebDriver driver;
 
     @BeforeEach
     void setUp(){
         homePage = HomePage.start();
-        driver = homePage.getDriver();
     }
 
     @ParameterizedTest
@@ -46,6 +44,6 @@ class SearchTest {
 
     @AfterEach
     void tearDown(){
-        driver.quit();
+        Driver.getDriver().quit();
     }
 }
