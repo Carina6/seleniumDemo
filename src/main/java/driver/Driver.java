@@ -9,16 +9,15 @@ import utils.FileUtil;
 import java.io.File;
 
 public class Driver {
-    private static WebDriver driver;
-
-    public static void start() {
+    public static WebDriver start() {
         setDriverPath();
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--start-maximized");
 //        options.addArguments("--headless");
 
-        driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
+        return driver;
     }
 
     private static void setDriverPath() {
@@ -39,15 +38,11 @@ public class Driver {
 
     }
 
-    public static WebDriverWait webDriverWait(){
+    public static WebDriverWait webDriverWait(WebDriver driver){
         return new WebDriverWait(driver, FileUtil.getConfig().timeOut);
     }
 
-    public static WebDriverWait webDriverWait(Integer timeOut){
+    public static WebDriverWait webDriverWait(WebDriver driver, Integer timeOut){
         return new WebDriverWait(driver, timeOut);
-    }
-
-    public static WebDriver getDriver() {
-        return driver;
     }
 }

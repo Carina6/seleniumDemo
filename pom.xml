@@ -8,6 +8,12 @@
     <artifactId>seleniumDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
@@ -53,7 +59,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
                 <configuration>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <!-- 设置并行运行，这个只能是class之间并行,且在同一进程下-->
+                    <!--<forkCount>4</forkCount>-->
+                    <!--<reuseForks>false</reuseForks>-->
+                    <reportFormat>plain</reportFormat>
+                    <includes>
+                        <include>**/*Test*.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
@@ -63,20 +75,4 @@
         </plugins>
     </build>
 
-
-
-
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>alimaven</id>-->
-            <!--<name>Maven Aliyun Mirror</name>-->
-            <!--<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>-->
-            <!--<releases>-->
-                <!--<enabled>true</enabled>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-    <!--</repositories>-->
 </project>

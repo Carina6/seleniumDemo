@@ -1,6 +1,7 @@
 package page;
 
 import driver.Driver;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,9 +12,9 @@ public class HogwartsPage extends NavBarPage {
     @FindBy(css = ".title a")
     private List<WebElement> topicElements;
 
-    HogwartsPage() {
-        super();
-        Driver.webDriverWait().until(ExpectedConditions.titleIs("TesterHome"));
+    HogwartsPage(WebDriver driver) {
+        super(driver);
+        Driver.webDriverWait(driver).until(ExpectedConditions.titleIs("TesterHome"));
     }
 
     public void gotoPaper(){

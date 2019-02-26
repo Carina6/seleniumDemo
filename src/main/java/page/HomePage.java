@@ -14,25 +14,19 @@ public class HomePage extends NavBarPage {
     @FindBy(css = ".content img")
     private WebElement bannerElement;
 
-    public static HomePage start(){
-        Driver.start();
-        WebDriver driver = Driver.getDriver();
+    public HomePage(WebDriver driver) {
+        super(driver);
+
         driver.get(FileUtil.getConfig().homeUrl);
-
-        return new HomePage();
-    }
-
-    private HomePage() {
-        super();
-        Driver.webDriverWait().until(ExpectedConditions.titleIs("TesterHome"));
+        Driver.webDriverWait(driver).until(ExpectedConditions.titleIs("TesterHome"));
     }
 
     public EventPage gotoBannerPage(){
-        Set<String> exHandles = Driver.getDriver().getWindowHandles();
+        Set<String> exHandles = driver.getWindowHandles();
 
         bannerElement.click();
-        SeleniumUtil.switchWindow(exHandles);
+        SeleniumUtil.switchWindow(driver,exHandles);
 
-        return new EventPage("第五届移动互联网测试开发大会");
+        return new EventPage(driver,"第五届移动互联网测试开发大会");
     }
 }
